@@ -8,13 +8,13 @@ const client = new Discord.Client();
 require('dotenv').config();
 
 client.on('ready', () => {
-  client.user.setActivity(';;play <url>');
+  client.user.setActivity('git.io/JeBUF');
 });
 
 client.on('message', async message => {
   if (!message.guild) return;
   if (message.author.bot) return;
-  if (message.content.includes(';;play')) {
+  if (message.content.includes(';play')) {
     if (message.member.voiceChannel) {
       message.member.voiceChannel.leave();
       await message.member.voiceChannel.join()
@@ -25,7 +25,6 @@ client.on('message', async message => {
             return;
           } else {
             message.channel.send('playing: ' + url);
-            message.delete();
             play(connection, url);
           }          
         }).catch(console.log);
@@ -34,7 +33,7 @@ client.on('message', async message => {
     }
   }
 
-  if (message.content.includes(';;stop')) {
+  if (message.content.includes(';stop')) {
     if (message.member.voiceChannel) {
       message.member.voiceChannel.leave();
     }
