@@ -1,17 +1,33 @@
+'use strict';
+
 const Discord = require('discord.js');
 const opus = require('node-opus');
 const ytdl = require('ytdl-core-discord');
 const client = new Discord.Client();
 
-client.on('message', message => {
+require('dotenv').config();
+
+client.on('ready', () => {
+  client.user.setActivity(';;play <url>');
+});
+
+client.on('message', async message => {
   if (!message.guild) return;
+  if (message.author.bot) return;
   if (message.content.includes(';;play')) {
     if (message.member.voiceChannel) {
-      message.member.voiceChannel.join()
+      message.member.voiceChannel.leave();
+      await message.member.voiceChannel.join()
         .then(connection => {
-          message.reply('connected to channel: ' + message.member.voiceChannel.name);
           const url = message.member.lastMessage.content.slice(6);
-          play(connection, url);
+          if (!(url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/))) {
+            message.reply('Youtube links supported only. ;;play <youtube-url>')
+            return;
+          } else {
+            message.channel.send('playing: ' + url);
+            message.delete();
+            play(connection, url);
+          }          
         }).catch(console.log);
     } else {
       message.reply('Join a voice channel first.');
@@ -29,4 +45,4 @@ async function play(connection, url) {
   connection.playOpusStream(await ytdl(url));
 }
 
-client.login('');
+client.login(process.env.TOKEN);
