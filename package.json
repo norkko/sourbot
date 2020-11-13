@@ -2,7 +2,7 @@
   "name": "sourbot",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js\u001b[D\u001b[\u001b[3~\u001b[3~\u001b[3~\u001b[3~index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/august-norkko/sourbot#readme",
   "dependencies": {
-    "discord.js": "^11.5.1",
+    "discord.js": "^11.6.4",
     "dotenv": "^8.2.0",
     "node-opus": "^0.3.3",
-    "ytdl-core-discord": "^1.0.3"
+    "ytdl-core-discord": "^1.2.4"
   }
 }

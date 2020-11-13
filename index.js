@@ -8,7 +8,7 @@ const client = new Discord.Client();
 require('dotenv').config();
 
 client.on('ready', () => {
-  client.user.setActivity('git.io/JeBUF');
+  client.user.setActivity('TRIHARD 7');
 });
 
 client.on('message', async message => {
@@ -21,9 +21,10 @@ client.on('message', async message => {
         .then(connection => {
           const url = message.member.lastMessage.content.slice(6);
           if (!(url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/))) {
-            message.reply('Youtube links supported only. ;;play <youtube-url>')
+            message.reply('Youtube links supported only. ;play <youtube-url>')
             return;
           } else {
+            console.log('. Playing ' + url);
             message.channel.send('playing: ' + url);
             play(connection, url);
           }          
